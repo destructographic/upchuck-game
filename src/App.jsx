@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementScore, setQuestion, setGameOver } from './components/slice';
 import { getDrinkById } from './components/API';
@@ -12,18 +12,32 @@ function App() {
   const currentQuestion = useSelector(state => state.game.currentQuestion);
   const gameOver = useSelector(state => state.game.gameOver);
 
+  const [start, setStart] = useState(false);
+
   useEffect(() => {
-    // Load the first question when the component mounts
-    getDrinkById('11007') // Replace '11007' with a random id from your data
-      .then(drink => dispatch(setQuestion(drink)));
-  }, [dispatch]);
+    if (start) {
+      // Load the first question when the start button is clicked
+      getDrinkById('11007') // Replace '11007' with a random id from your data
+        .then(drink => dispatch(setQuestion(drink)));
+    }
+  }, [dispatch, start]);
+
+  const handleStart = () => {
+    setStart(true);
+  };
+
+  const handleRestart = () => {
+    // Reset the game
+    setStart(false);
+    dispatch(setGameOver());
+  };
 
   if (gameOver) {
-    return <GameOverScreen score={score} />;
-  } else if (currentQuestion) {
+    return <GameOverScreen score={score} onRestart={handleRestart} />;
+  } else if (start && currentQuestion) {
     return <QuestionScreen question={currentQuestion} />;
   } else {
-    return <TitleScreen />;
+    return <TitleScreen onStart={handleStart} />;
   }
 }
 
