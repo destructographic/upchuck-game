@@ -6,6 +6,10 @@ import TitleScreen from './components/TitleScreen';
 import QuestionScreen from './components/QuestionScreen';
 import GameOverScreen from './components/GameOverScreen';
 
+// dummy setScore function for now
+const setScore = () => console.log('called setScore');
+
+
 function App() {
   const dispatch = useDispatch();
   const score = useSelector(state => state.game.score);
@@ -22,15 +26,16 @@ function App() {
       dispatch(setQuestion(currentQuestion));
       dispatch(setGameOver(gameOver));
       setStart(start);
-      // TODO: add 'setScore' action to slice to update the score
-      dispatch(setScore(score));
+      // call setScore (without dispatching an action for now)
+      setScore(score);
     }
   }, [dispatch]);
+  
 
   useEffect(() => {
     if (start) {
-      // load the first question when the start button clicked
-      getDrinkById('11007') // Replace '11007' with a random id
+      // load first question when "start" is clicked
+      getDrinkById('11007') // replace '11007' with a random id from data
         .then(drink => dispatch(setQuestion(drink)));
     }
   }, [dispatch, start]);

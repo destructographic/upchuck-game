@@ -14,8 +14,8 @@ export const gameSlice = createSlice({
     setQuestion: (state, action) => {
       state.currentQuestion = action.payload;
     },
-    setGameOver: state => {
-      state.gameOver = true;
+    setGameOver: (state, action) => {
+      state.gameOver = action.payload;
     },
   },
 });
