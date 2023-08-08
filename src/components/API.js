@@ -1,5 +1,8 @@
+// API.js
+import { loadDrinkIndex } from '../utils/gameLogic';
 import axios from 'axios';
-// import drinkIndex from '../data/drink_index.json';
+
+
 
 export function getDrinkById(id) {
   console.log('Requested ID:', id);
@@ -15,28 +18,13 @@ export function getDrinkById(id) {
 
 
 
-export async function selectRandomDrink() {
-  try {
-    const response = await fetch('/data/drink_index.json');
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const drinkIndex = await response.json();
-
-    if (!drinkIndex) {
-      console.error('Fetch response:', response);
-      throw new Error('Fetch response does not contain data');
-    }
-
+export function selectRandomDrink() {
+  return loadDrinkIndex().then(drinkIndex => {
     const drinkIds = Object.keys(drinkIndex);
     console.log('Drink index length:', drinkIds.length);
     const randomIndex = Math.floor(Math.random() * drinkIds.length);
     const selectedDrinkId = drinkIds[randomIndex];
     console.log('Selected drink ID:', selectedDrinkId);
     return selectedDrinkId;
-  } catch (error) {
-    console.log('There was a problem with the fetch operation: ' + error.message);
-  }
+  });
 }

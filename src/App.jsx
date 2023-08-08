@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     if (start) {
-      // Select a random drink ID and load the corresponding question
+      // select a random drink ID and load the corresponding question
       selectRandomDrink()
         .then(id => getDrinkById(id))
         .then(drink => dispatch(setQuestion(drink)));
