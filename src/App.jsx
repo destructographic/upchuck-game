@@ -1,14 +1,15 @@
+// App.jsx
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementScore, setQuestion, setGameOver } from './components/slice';
-import { getDrinkById } from './components/API';
+import { getDrinkById, selectRandomDrink } from './components/API'; // import selectRandomDrink
 import TitleScreen from './components/TitleScreen';
 import QuestionScreen from './components/QuestionScreen';
 import GameOverScreen from './components/GameOverScreen';
 
 // dummy setScore function for now
 const setScore = () => console.log('called setScore');
-
 
 function App() {
   const dispatch = useDispatch();
@@ -30,15 +31,17 @@ function App() {
       setScore(score);
     }
   }, [dispatch]);
-  
 
   useEffect(() => {
     if (start) {
-      // load first question when "start" is clicked
-      getDrinkById('11007') // replace '11007' with a random id from data
+      // Select a random drink ID and load the corresponding question
+      selectRandomDrink()
+        .then(id => getDrinkById(id))
         .then(drink => dispatch(setQuestion(drink)));
     }
   }, [dispatch, start]);
+  
+  
 
   useEffect(() => {
     // save game state to local storage on change
@@ -58,7 +61,7 @@ function App() {
   const handleRestart = () => {
     // Reset the game
     setStart(false);
-    dispatch(setGameOver());
+    dispatch(setGameOver(false));
   };
 
   if (gameOver) {
