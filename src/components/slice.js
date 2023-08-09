@@ -1,3 +1,5 @@
+// slice.js
+
 import { createSlice } from '@reduxjs/toolkit';
 
 export const gameSlice = createSlice({
@@ -8,8 +10,8 @@ export const gameSlice = createSlice({
     gameOver: false,
   },
   reducers: {
-    incrementScore: state => {
-      state.score += 1;
+    incrementScore: (state, action) => {
+      state.score += action.payload || 1; // increment by payload value or 1 if no payload
     },
     setQuestion: (state, action) => {
       state.currentQuestion = action.payload;

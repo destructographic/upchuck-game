@@ -22,8 +22,5 @@ The project is developed using Vite, and it follows best practices for code orga
 ## How to Run
 [Deployed on Netlify](https://relaxed-cucurucho-b5a234.netlify.app/)
 
-## Contributing
-tbd
-
 ## License
 tbd
