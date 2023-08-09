@@ -32,3 +32,21 @@ export function getRandomDrinkName(excludeId) {
   const randomIndex = Math.floor(Math.random() * drinkIds.length);
   return drinkIndex[drinkIds[randomIndex]].strDrink;
 }
+
+
+
+export function evaluateChoice(pickedChoice, correctChoice) {
+  if (pickedChoice === correctChoice) {
+    // choice was correct. calculate points, bonus, etc.
+    return {
+      isCorrect: true,
+      points: 10, // replace with more sophisticated logic.
+    };
+  } else {
+    // choice was incorrect.
+    return {
+      isCorrect: false,
+      points: 0,
+    };
+  }
+}
