@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { incrementScore, setQuestion } from './slice';
 import { getDrinkById } from './API';
 import { getRandomDrinkName } from '../utils/gameLogic';
+import { evaluateChoice } from '../utils/gameLogic';
 
 
 
@@ -79,6 +80,15 @@ function BuildQuestionPayload(drink) {
     correctChoiceIndex,
   };
 }
+
+
+
+const handlePickedChoice = (choice) => {
+  setPickedChoice(choice);
+  const result = evaluateChoice(choice, payload.correctChoice);
+  // makes result.isCorrect and result.points available
+};
+
 
 
 export default QuestionScreen;
