@@ -22,3 +22,13 @@ export function loadDrinkIndex() {
       });
   }
 }
+
+
+
+export function getRandomDrinkName(excludeId) {
+  let drinkIds = Object.keys(drinkIndex);
+  // exclude the provided ID
+  drinkIds = drinkIds.filter(id => id !== excludeId);
+  const randomIndex = Math.floor(Math.random() * drinkIds.length);
+  return drinkIndex[drinkIds[randomIndex]].strDrink;
+}
