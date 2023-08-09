@@ -1,4 +1,4 @@
-# [Upchuck](https://swc.rs/)
+# [Upchuck](https://relaxed-cucurucho-b5a234.netlify.app/)
 
 Upchuck is a cocktail-themed quiz game that challenges players to identify drinks based on their image and ingredients. The game is built using React and leverages the [TheCocktailDB API](https://www.thecocktaildb.com) to fetch drink details.
 
@@ -20,7 +20,7 @@ The current version of the game sets the foundation for additional features, suc
 The project is developed using Vite, and it follows best practices for code organization and separation of concerns.
 
 ## How to Run
-tbd
+[Deployed on Netlify](https://relaxed-cucurucho-b5a234.netlify.app/)
 
 ## Contributing
 tbd
