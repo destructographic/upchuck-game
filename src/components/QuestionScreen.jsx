@@ -12,6 +12,7 @@ import { evaluateChoice } from '../utils/gameLogic';
 function QuestionScreen() {
   const dispatch = useDispatch();
   const question = useSelector(state => state.game.currentQuestion);
+  const score = useSelector(state => state.game.score); // Add this line to get the score
   const [payload, setPayload] = useState(null);
   const [pickedChoice, setPickedChoice] = useState(null);
 
@@ -22,10 +23,19 @@ function QuestionScreen() {
     }
   }, [question]);
 
+
   const handlePickedChoice = (choice) => {
     setPickedChoice(choice);
-    // add logic to check the choice, update the score, etc
+  
+    // check if the selected choice the correct answer
+    if (choice === payload.choices[payload.correctChoiceIndex]) {
+      // If correct, increment the score
+      dispatch(incrementScore());
+    }
+  
+    // additional logic here, like moving to next question
   };
+  
 
   if (!payload) {
     return <div>Loading...</div>;
@@ -35,6 +45,7 @@ function QuestionScreen() {
 
   return (
     <div>
+      <div>Score: {score}</div> {/* Add this line to display the score */}
       <img src={image} alt="Cocktail Drink" />
       <ul>
         {ingredients.map((ingredient, index) => (
@@ -49,6 +60,7 @@ function QuestionScreen() {
     </div>
   );
 }
+
 
 
 
@@ -92,3 +104,7 @@ const handlePickedChoice = (choice) => {
 
 
 export default QuestionScreen;
+
+
+
+
